@@ -1,36 +1,42 @@
 <?php
 
 include_once("../models/User.php");
-include_once("../models/Faq.php");
-include("../connection/connection.php");
+include_once("../apis/v1/PhotoController.php");
+include_once(__DIR__ . "/../connection/connection.php");
 
-User::setUser("Halim Njeim", "michaelnjeim44@gmail.com", "CaptainSlash");
-User::saveUser();
+ User::create("sleiyah02@gmail.com", hash('sha256', "CaptainSlash"));
+ User::save();
 
 
-$faqs = [["question" => "What is the primary purpose of Reference Architectures (RAs)?",
-        "answer" => "The primary purpose of RAs is to capture the essence of existing architectures and provide guidance for developing new system architectures. They help reuse proven patterns, reduce design effort, and ensure consistency across projects."],
-        ["question" => "How do RAs balance abstraction and specificity?",
-        "answer" => "RAs maintain a high level of abstraction, meaning they are not too specific but provide enough detail to be understandable. This allows them to be applicable across different projects while still being useful in guiding architectural decisions."],
-        ["question" => "What are the key elements that define a system, according to the report?",
-        "answer" => "A system is defined by the combination of a creator (architect), a structure (architecture), a design pattern (problem-solution approach), and a set of rules (architecture framework)."],
-        ["question" => "How do different companies interpret the concept of Reference Architecture?",
-        "answer" => "Sun Computer views Reference Architecture as a guide for system design and risk reduction. Burton Group Research considers it a framework built from industry experience. BEA Systems defines it as a set of tools, templates, and structured methods to implement projects efficiently."],
-        ["question" => "What role do patterns play in Reference Architectures?",
-        "answer" => "Patterns provide solutions to common design problems, ensuring best practices are reused instead of reinventing solutions. They contribute to efficiency, cost reduction, and consistency across different projects."],
-        ["question" => "What are the key principles of a well-structured Reference Architecture?",
-        "answer" => "A good Reference Architecture must be adaptable, efficient, legally compliant, based on quality data, and act as a flexible foundation that does not restrict future technological decisions."],
-        ["question" => "How do Reference Architectures evolve and improve?",
-        "answer" => "They improve through continuous feedback. After being used in designing system architectures, their effectiveness is evaluated, and adjustments are made based on real-world challenges and opportunities for improvement."],
-        ["question" => "What is the difference between implicit and explicit knowledge in Reference Architectures?",
-        "answer" => "Implicit knowledge exists within individuals or teams but is undocumented, while explicit knowledge is recorded and shared. Reference Architectures aim to transform implicit knowledge into explicit knowledge through documentation and structured patterns."],
-        ["question" => "Why is it important to maintain and update Reference Architectures?",
-        "answer" => "Regular updates ensure that Reference Architectures remain relevant and effective. Without maintenance, they risk becoming outdated and losing their ability to provide meaningful guidance."],
-        ["question" => "How can Reference Architectures be simply described?",
-        "answer" => "A Reference Architecture is a structured blueprint that helps design projects by aligning business, technical, and customer needs while ensuring adaptability, efficiency, and reusability."]];
+$photos = [
+    [
+        'user_id' => 6,
+        'title' => 'Mountain Landscape',
+        'tag' => 'nature',
+        'description' => 'Beautiful mountain view at sunset',
+        'image' => 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAAyAEsDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9U6KKKACiiigAooooAKKKKAEIzUbWsMjiRoY2cdGZQSPxp8jrFGzuQqKMknsK+ePjv+0TdeHPEMOmeF7y3a2jtzcS3VvOHEmSSFDDjAA5x1zmvPxuMpYKn7Spserg8DWx1X2NFXZj/tO/GeX4S2WmaZ4duIdR8T6y7RWcLLuSFEHzSMOxGcD3P0NeL+A/j/8AEzwH4qt/EGp+MdU1nThIGudNugqRyoD8wUpjecZHJ7jFeRfFI6lc+OvENxd3FxLI948heQksSSc5Jr9VPhH+zd4T1X4S+EtQvtGt7i7utGtJpZGX75aJST+dfm2bcVYnH42jXwkknFpq7Z+pcPcHYXA4GvQxcW1JNOy0PnT4eft6+LdG1K3tPG1tDrGmyMFkuoEC3ES5+8ccPj2wfY19t6VqdnrWm2uoWFzFeWV1Gs0M8TbkkRhkMD3BBFfBPxo/ZPtvDFneeJvBge4sLcGW80tmy8ajq8RPJUdSOo9xX0B+xJrd1rHwTEFzI0n9n30tpGzHJCbVdR+Abj2FfYcM8S4jEVFhMVLmm9m+p8JxbwjhsNReLwseWS3S6H0FRRRmv0I+ACiiigBCcCvLfjp8VJPh14agt9PupLLVNRkMUVxEpLQrgksBjqQMAntmuJ/aH+NQ+E+mW9lpojuNfv1dootw/cxrjc7e/IwPWvh7xd4q1Hxf4hvtb1W4M97eSGRnPRewVR2AAwBX5/xJxCsDF4ej8b38j9H4R4beYSeJrfAvxZ1niHxNfa5fa1qNzczeZqLNM8ucN5jdcj0z0r7j/YW+AcXgjwHB441qASeJNcj3W6yD5rO1PDKAf4nHDHtjaK/P/wCLniweGdLHgPwxIzx/uYdRmhOGnkb73P8As9v516z+xv8AtKaVoes6F4O8RXLWOoXl0sGnahKcJN5h2pE5/hYnAB6E8dTXyuU0p4zM3Gbuk7n1WbVYYLLFOCvfQ++fit8EdF+LXhqfT7qGOHUo1b7HfKuJIH7Z/vL3U9/rX58eOfAviv8AZz8ar5kdzY6i8Lpp+qoC0E8JOdjgfwtjqOx7HBP6XxsHUMpBUjII4IrO13wzpHiawa01rTLTUoGGCLmFZM+x4yPxr6XMcnpY2ndqz6M+YyvNauCnZ6x6odompw694fsdSidXju4EmVlbIBYA4P41qVx/w6ja3+H+jRO25o0dSfbzGxXYV9Bh6nPRjLuj5nFU+StKPZhRRRWhiBu1fJf7XXjm6nls/DVrNJHZRr9puFRtu9jkKD9AM496+tT0r4K/a4TzPiRuHO6xj/mf6186q3+0Z0f5H1GTUtcVH0Z5p8NfAFz8R/FcOmIzRWUY8y7nXgxp2H+8xx+vSu6+Mnxq0zVbjTfh78NofJ8P6Q4iMsIx9vn64P8AsrxgdzgVmfDrxZB8E/gS/itYPO1vxB4ha3sWYc+SqsJGH4Aj8a8w8L+ILjwz4gs9Vt9omtJA+w8B16Mp9iMj8a+XnXeKxVa6/dxfKvPufWwoLCYWjZ/vJLmflyE8feHbzwjrlxpt0hBjP7t8cSL2YV9EfsQW6+L/AI56lquuTm7Twzpbxi1c/LHLLgYA/wBpUJ/4EPWvH/iH4uPjjxdd6sY/Jik2xwx/3I14X88k/jX2V/wTz+H0el/DS+8VTRYuteuDHE+Puw27EAD23l/zFcfE9NQyp0lq5M6uGarpZk6r0UUfUp5GakFFFfkx+tCUUUUAIfun6V+f37VsLf8ACx5ZGGQbGP8ATdj+tFFaUPjM6urOE+G3jtPhh8IvEVx5YuH1vVktYhJny4ogy5b2zhcfWuBZmdi7sWYnJJPJoorx8Xh1Wr+0a1R72ExLo0PZJ6Gyng3UPDfhC88Y3MCR2xuo7aCNzg3Db9zBfVRjn1JFfpXpumwaJ4fstOt1CQWlvHboo7KqgAfkKKK68ZGKXs1sjjwcpN+0fU06KKK806AooooA/9k='
+    ],
+    [
+        'user_id' => 6,
+        'title' => 'Beach Sunset',
+        'tag' => 'travel',
+        'description' => 'Amazing colors during sunset at the beach',
+        'image' => 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAyAQMAAABbOJUTAAAABlBMVEX///8AAABVwtN+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAMElEQVQImWNgGAXY4QMDw3/i8f/hwxhiDC9ePMDAQCJm+DDEMCMDiZgRQ2wUDCsAAFxnHfe9nYLSAAAAAElFTkSuQmCC'
+    ],
+    [
+        'user_id' => 6,
+        'title' => 'Urban Skyline',
+        'tag' => 'city',
+        'description' => 'Modern city skyline with skyscrapers',
+        'image' => 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAAyAEsDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9U6KKKACiiigAooooAKKKKACiiigAooooAKKKKACvH/jp8dbf4fJHpelKmoeJLhcxwNnZbIfvO+O/91e/HQc19B67erYeH9Su3OEgtZJmPsorwP4A+Dx4u1y58Ta0DcTpcbba3k5Dyt95yO4XOPqa+a4izL6lh3GP8SW39I+v4Vyv61iVOX8OO/8AWx8SSeI/2j/Gut/2i2oeIp7fc377dHaxqvsoGPyr6F+CX7Uk8l5Z+HfG7xTR3DLFb6qiAMr9AJQOhz/FjHrjvX2LLGsqFHUMrDBB6Gvl/wCN/wAHhDc3Hi3w3CM5L31rEP8Ax9R/MfnX51lueTw1b2uIXNF6s/Q8yyGni6PoOp7r0R9Uo4dQykMpGQQeCKdXzh+z78X/AO2Ybfw1rEw/tO3XFrM5/wBdGP4Sf7y/qPpX0dX6XhMVTxdJVab0Py/GYSrhKrowegUUUV1HKFFZ+u63p3hnSbjU9VvIbCwt1LyzTuFVR/U+g718VfFz9rjVvEt1PpfgpZNH0kErJeuALic+g/hT8MmvOxuPoYKHPWl6LqehgsDWxs+SlH1fQ+ivjZ8YIPB+mNoukXCDX7tP3jKcmzhP8R/2j/CPz7V8s/DfwbP4s12CNVZ1LmWaQjJA6/ma8W0O/wBT1S+D3ErXD3DZkkc5aRz1PNfcfwN8IDQPDxvrlNt7fYYg9Y06D8Tk/hX5rmlWvnWJhhqTtBfgf0Bl9DD5Jh54iqryf4nc2lnHZ28cEKLHFGoVFUYAAGABXzl+0b8IG15ZfEfh+EjUI1zd2ijBnUdWHqw/Mfnj6QpHRZEZGUMjDDA8gj1rnzDL6eNo+zn8n2Z4+X46phamsdOjPz+8GeONT8BavFqGnSttBAntyT5cyZ4Vh/MdQa/QjwD410/x/wCF7TX9JfdBMNrxsd0Uw6o3uP1HB5FfG/xp+Fj+HL2TVdJiJ0aZsyRqP+PZj/D/ALp7e3TtWT8NviHqPw48Uw6jaEtbuwitoBktE/8AEp/X2Ir38mzGeT1fq+I1pS2fZn0eaYGGbUvrFH+JHfzR+k9Fct4L8Z6b488M2et6TODI4HwsQskEgGVdT3B/ToRzXU1+o06kKsFODumfkc4SpycZqzQV8vf8FDPiUvhb4Zab4Tt5QLzxFcb5wDysEJ5B/wB5tp/4Ca+oQMmvzv8A+ClXiFtU+OGmacJCY9L0mPaueN8rtIf/AEAVx5hV9lhZs7cDT9pXij5jtfD0sDR3NxGUnAyvqFPYetfU3w+8YpqXhOO1kkzcWZEZU9SvY/l+lfNcUYJCk5xxXTeDvFFx4f1lJFclCV3j+8vYj618BhcVLDV41YdD9JrUIYilKlLoz6TBDKGUggjII715B8S/hBpHxYvItRs5W0rXo4fs/wBqVN8VwgOQkiZ5ABJVgcg9iDmu80rUotS06C5jYEOoJHoe4/A1dIr9Np1Y1IqUHdM/OZwlCThNWaPki++EWveC7+Swv7BoLiMZ+YZSRf76sOVPuKsxTeIvhXdxzpDJp6sQJYJR5lvMPRh0+h/A19TXFvFdQvDNGssUg2sjjIYHoQa851n4R6B4ikM8UDaddnrJaHap+qn5T+VdNPGcuktzCeG5tYM6P4c/G/RfHkSWsrCw1YDmzlbhz/0zb+L6dfrXpYOa+R9a+DOu+HXaSCIXka/xxHa4+q/41kWVv4h8IXiXGn3VzZTLzuibGfqP4T9RXqU8xpTVprU4ZYOcXeLPsXyHM/n7/wB9t27b2zjGa+NP2vPh7Y/D/wCPl1e6JCsOna/bLqSrGoVRIWKSYA4G7G782rtvDnxw1PTNlrrNv9vg6ecgCyKP5N+h+tUPjR8ULT4mXeiz262ivpLTBpnYMrhlXAA9MGuXH0oYrByUXrc3wdSWGrxlJaWPLItJluELwlZEH8S9B9a0NEu5tK1BZY3aNk6Eda9V+EfgXStQ8Lm/1bT4bkSysIi6528DAHvnn8K5H4peCI/DOoxXVioS0uWwYwPuP/d+h7Vn7OPsVUtqnc6KdZ1KjpW1LOQj1C4t7SGeGZopoxtZT2qwjpKgZGDKehBry7wN431fwJqgu9MnKgnEkLZMcy/3XHf/ABr1m1vbbULVLm0njubeQbkliYMrD2Ir6DC42FR+zqL3keHicJOH7ym/dZ88fHf4aS+CfER1G1iJ0fUHJTaMiCQ8lPbP3h9fWu3+FvhLT/Fvgy0nvYtxlmlRXU4ZQGxtPpnp9K9Y8Q+HtO8T6PcaXqtsl1ZzjDI3UHsVPYjsRXGfD/4Z3Hg7WNRu49TSaz80RwqIxlFweT9STXtYilSjSlGS32PCpVKs5pxe3UvXPwb8JXcZRtMEeeqxyso/LOf1rjNb/Z1huiyaVqDRHoEuU3AfRl/qK9iooowi9Uh+0qLRSPkTxd8CvFHhuR5bW2OqWw6SWnL49Snzfpn2rz17Z0kdGR0dTgq6kEH2Ir9B65Xx98LvDXjuEjUtOjNyBhbqABJl+vqPYg1TVRbO5m6b3jofHPgnwbdeKtcjtIkdYQwaab+FE9c+p7CvoC88SeH/AIaeGHs9ME0rYIit7UZeQn+Jm6D6/wAqbf8AwN8R/DW7N94ZuhdRKM+das0cp9CQcqfzrqvCngmXVpI7rVZClopBEEbYaT2J7D2pxwspR56jt2QTxcYy5aaue0fD/wCJtl8Q9CMNtFPDfWjCWCWGN3IB+8u1QT09veuuqKztIbCzhtbdBHBCgREHZQMAVLXbCEYK0VocE5ym7yeotFFFUZn/2Q=='
+    ]
+];
+global $data;
 
-foreach($faqs as $faq){
-    Faq::setFaq($faq["question"], $faq["answer"]);
-    Faq::saveFaq();
+foreach($photos as $photoData) {
+    $data = $photoData;
+    PhotoController::addPhoto();
+    echo "Added photo: " . $photoData['title'] . "\n";
 }
+
 ?>

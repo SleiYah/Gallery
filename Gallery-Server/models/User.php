@@ -1,6 +1,6 @@
 <?php
-require("UserSkeleton.php");
-require(__DIR__ . '/../connection/connection.php');
+require_once("UserSkeleton.php");
+require_once(__DIR__ . '/../connection/connection.php');
 
 class User extends UserSkeleton{
 
@@ -28,7 +28,6 @@ class User extends UserSkeleton{
         
         return false; 
     }
-
 
 };
 
