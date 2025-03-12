@@ -10,21 +10,21 @@ include_once(__DIR__ . "/../connection/connection.php");
 
 $photos = [
     [
-        'user_id' => 6,
+        'user_id' => 1,
         'title' => 'Mountain Landscape',
         'tag' => 'nature',
         'description' => 'Beautiful mountain view at sunset',
         'image' => 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAAyAEsDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9U6KKKACiiigAooooAKKKKAEIzUbWsMjiRoY2cdGZQSPxp8jrFGzuQqKMknsK+ePjv+0TdeHPEMOmeF7y3a2jtzcS3VvOHEmSSFDDjAA5x1zmvPxuMpYKn7Spserg8DWx1X2NFXZj/tO/GeX4S2WmaZ4duIdR8T6y7RWcLLuSFEHzSMOxGcD3P0NeL+A/j/8AEzwH4qt/EGp+MdU1nThIGudNugqRyoD8wUpjecZHJ7jFeRfFI6lc+OvENxd3FxLI948heQksSSc5Jr9VPhH+zd4T1X4S+EtQvtGt7i7utGtJpZGX75aJST+dfm2bcVYnH42jXwkknFpq7Z+pcPcHYXA4GvQxcW1JNOy0PnT4eft6+LdG1K3tPG1tDrGmyMFkuoEC3ES5+8ccPj2wfY19t6VqdnrWm2uoWFzFeWV1Gs0M8TbkkRhkMD3BBFfBPxo/ZPtvDFneeJvBge4sLcGW80tmy8ajq8RPJUdSOo9xX0B+xJrd1rHwTEFzI0n9n30tpGzHJCbVdR+Abj2FfYcM8S4jEVFhMVLmm9m+p8JxbwjhsNReLwseWS3S6H0FRRRmv0I+ACiiigBCcCvLfjp8VJPh14agt9PupLLVNRkMUVxEpLQrgksBjqQMAntmuJ/aH+NQ+E+mW9lpojuNfv1dootw/cxrjc7e/IwPWvh7xd4q1Hxf4hvtb1W4M97eSGRnPRewVR2AAwBX5/xJxCsDF4ej8b38j9H4R4beYSeJrfAvxZ1niHxNfa5fa1qNzczeZqLNM8ucN5jdcj0z0r7j/YW+AcXgjwHB441qASeJNcj3W6yD5rO1PDKAf4nHDHtjaK/P/wCLniweGdLHgPwxIzx/uYdRmhOGnkb73P8As9v516z+xv8AtKaVoes6F4O8RXLWOoXl0sGnahKcJN5h2pE5/hYnAB6E8dTXyuU0p4zM3Gbuk7n1WbVYYLLFOCvfQ++fit8EdF+LXhqfT7qGOHUo1b7HfKuJIH7Z/vL3U9/rX58eOfAviv8AZz8ar5kdzY6i8Lpp+qoC0E8JOdjgfwtjqOx7HBP6XxsHUMpBUjII4IrO13wzpHiawa01rTLTUoGGCLmFZM+x4yPxr6XMcnpY2ndqz6M+YyvNauCnZ6x6odompw694fsdSidXju4EmVlbIBYA4P41qVx/w6ja3+H+jRO25o0dSfbzGxXYV9Bh6nPRjLuj5nFU+StKPZhRRRWhiBu1fJf7XXjm6nls/DVrNJHZRr9puFRtu9jkKD9AM496+tT0r4K/a4TzPiRuHO6xj/mf6186q3+0Z0f5H1GTUtcVH0Z5p8NfAFz8R/FcOmIzRWUY8y7nXgxp2H+8xx+vSu6+Mnxq0zVbjTfh78NofJ8P6Q4iMsIx9vn64P8AsrxgdzgVmfDrxZB8E/gS/itYPO1vxB4ha3sWYc+SqsJGH4Aj8a8w8L+ILjwz4gs9Vt9omtJA+w8B16Mp9iMj8a+XnXeKxVa6/dxfKvPufWwoLCYWjZ/vJLmflyE8feHbzwjrlxpt0hBjP7t8cSL2YV9EfsQW6+L/AI56lquuTm7Twzpbxi1c/LHLLgYA/wBpUJ/4EPWvH/iH4uPjjxdd6sY/Jik2xwx/3I14X88k/jX2V/wTz+H0el/DS+8VTRYuteuDHE+Puw27EAD23l/zFcfE9NQyp0lq5M6uGarpZk6r0UUfUp5GakFFFfkx+tCUUUUAIfun6V+f37VsLf8ACx5ZGGQbGP8ATdj+tFFaUPjM6urOE+G3jtPhh8IvEVx5YuH1vVktYhJny4ogy5b2zhcfWuBZmdi7sWYnJJPJoorx8Xh1Wr+0a1R72ExLo0PZJ6Gyng3UPDfhC88Y3MCR2xuo7aCNzg3Db9zBfVRjn1JFfpXpumwaJ4fstOt1CQWlvHboo7KqgAfkKKK68ZGKXs1sjjwcpN+0fU06KKK806AooooA/9k='
     ],
     [
-        'user_id' => 6,
+        'user_id' => 1,
         'title' => 'Beach Sunset',
         'tag' => 'travel',
         'description' => 'Amazing colors during sunset at the beach',
         'image' => 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAyAQMAAABbOJUTAAAABlBMVEX///8AAABVwtN+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAMElEQVQImWNgGAXY4QMDw3/i8f/hwxhiDC9ePMDAQCJm+DDEMCMDiZgRQ2wUDCsAAFxnHfe9nYLSAAAAAElFTkSuQmCC'
     ],
     [
-        'user_id' => 6,
+        'user_id' => 1,
         'title' => 'Urban Skyline',
         'tag' => 'city',
         'description' => 'Modern city skyline with skyscrapers',
