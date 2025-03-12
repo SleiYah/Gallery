@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // Define your base directory 
 $base_dir = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
@@ -19,7 +19,12 @@ if ($request == '') {
 $apis = [
     '/login'         => ['controller' => 'UserController', 'method' => 'login'],
     '/register'    => ['controller' => 'UserController', 'method' => 'register'],
-    '/addPhoto'    => ['controller' => 'PhotoController', 'method' => 'addPhoto']
+    '/addPhoto'    => ['controller' => 'PhotoController', 'method' => 'addPhoto'],
+    '/getPhotos'    => ['controller' => 'PhotoController', 'method' => 'getPhotos'],
+    '/deletePhoto'    => ['controller' => 'PhotoController', 'method' => 'deletePhoto'],
+    '/updatePhoto'    => ['controller' => 'PhotoController', 'method' => 'updatePhoto']
+
+
 
 ];
 
@@ -27,7 +32,7 @@ if (isset($apis[$request])) {
     $controllerName = $apis[$request]['controller'];
     $method = $apis[$request]['method'];
     require_once "apis/v1/{$controllerName}.php";
-    
+
     $controller = new $controllerName();
     if (method_exists($controller, $method)) {
         $controller->$method();

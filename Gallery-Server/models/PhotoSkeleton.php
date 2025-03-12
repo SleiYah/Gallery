@@ -14,5 +14,22 @@ class PhotoSkeleton{
         self::$description = $description;
         self::$image = $image;
     }
+    public static function setUserId($user_id){
+        self::$user_id = $user_id;
+    }
+    public static function setIds($user_id , $photo_id){
+        self::$user_id = $user_id;
+        self::$id = $photo_id;
+    }
+
+    public static function update($user_id, $photo_id, $title, $tag, $description, $image = null) {
+        self::$user_id = $user_id;
+        self::$id = $photo_id;
+        self::$title = $title;
+        self::$tag = $tag;
+        self::$description = $description;
+        self::$image = $image;
+
+    }
 }
 ?>
