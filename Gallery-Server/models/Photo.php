@@ -41,7 +41,6 @@ class Photo extends PhotoSkeleton{
         $query->bind_param("ii", self::$user_id, self::$id);
         $query->execute();
         
-        // Check if any rows were affected by the deletion
         if($query->affected_rows > 0) {
             return true;
         }
@@ -51,7 +50,6 @@ class Photo extends PhotoSkeleton{
     public static function updatePhoto() {
         global $conn;
         
-        // Always include image in the update
         $query = $conn->prepare("UPDATE photos SET title = ?, tag = ?, description = ?, image = ? WHERE id = ? AND user_id = ?");
         $query->bind_param("ssssii", self::$title, self::$tag, self::$description, self::$image, self::$id, self::$user_id);
         

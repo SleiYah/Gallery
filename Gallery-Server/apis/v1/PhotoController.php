@@ -88,7 +88,6 @@ class PhotoController{
         
         $photos = Photo::read();
         
-        // Return the photos as JSON
         echo json_encode([
             "status" => "success",
             "photos" => $photos
@@ -107,11 +106,9 @@ class PhotoController{
         
         Photo::setIds($user_id, $photo_id);
         
-        // Get old image path for deletion
         $oldImagePath = Photo::getPhotoPath();
         
         if(Photo::delete()) {
-            // Delete the image file if delete was successful
             if($oldImagePath) {
                 $oldFilePath = __DIR__ . '/../../' . $oldImagePath;
                 if(file_exists($oldFilePath)) {
@@ -150,11 +147,9 @@ class PhotoController{
             return;
         }
         
-        // Process the base64 image
         if(preg_match('/^data:image\/(\w+);base64,/', $base64Image, $matches)) {
             $imageType = $matches[1];
             
-            // Remove the data:image part
             $base64Image = preg_replace('/^data:image\/\w+;base64,/', '', $base64Image);
             $base64Image = str_replace(' ', '+', $base64Image);
             
@@ -165,31 +160,23 @@ class PhotoController{
                 return;
             }
             
-            // Create directory if it doesn't exist
             $uploadDir = __DIR__ . '/../../images/';
             if(!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0755, true);
             }
             
-            // Get old image path for deletion
             Photo::setIds($user_id, $photo_id);
             $oldImagePath = Photo::getPhotoPath();
             
-            // Create a unique filename
             $filename = uniqid() . '.' . $imageType;
             $filePath = $uploadDir . $filename;
             
-            // Save the new image to the server
             if(file_put_contents($filePath, $imageData)) {
-                // Get the relative URL path for database storage
                 $imageUrl = 'images/' . $filename;
                 
-                // Set up the update data
                 Photo::update($user_id, $photo_id, $title, $tag, $description, $imageUrl);
                 
-                // Execute the update
                 if(Photo::updatePhoto()) {
-                    // Delete old image if update was successful
                     if($oldImagePath) {
                         $oldFilePath = __DIR__ . '/../../' . $oldImagePath;
                         if(file_exists($oldFilePath)) {
@@ -206,7 +193,6 @@ class PhotoController{
                         ]
                     ]);
                 } else {
-                    // Remove the uploaded file if database update fails
                     @unlink($filePath);
                     echo json_encode(["status" => "error", "message" => "Failed to update photo information"]);
                 }
