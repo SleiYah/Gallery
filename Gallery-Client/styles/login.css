@@ -1,13 +1,5 @@
 /* login.css - Simple & Cozy theme */
-:root {
-    --color-primary: #7d5a5a;
-    --color-text: #3d3131;
-    --color-text-light: #6e5c5c;
-    --color-bg: #f9f4f1;
-    --color-card: #ffffff;
-    --color-accent: #d9bfb7;
-    --font-main: 'Segoe UI', 'Helvetica Neue', sans-serif;
-  }
+
   
   body {
     margin: 0;
@@ -15,7 +7,6 @@
   }
   
   .login-container {
-    min-height: 100vh;
     background-color: var(--color-bg);
     font-family: var(--font-main);
     display: flex;

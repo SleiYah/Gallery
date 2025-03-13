@@ -23,7 +23,6 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Simple validation
     if (!formData.email || !formData.password) {
       setError('Please fill in all fields');
       return;
@@ -40,13 +39,10 @@ const Login = () => {
       const data = response.data;
       
       if (data.status === 'success') {
-        // Store user data in localStorage or context
-        localStorage.setItem('user', JSON.stringify({
-          id: data.user_id,
-          email: formData.email,
-        }));
-        
-        // Redirect to gallery
+        localStorage.setItem('user_id', data.data.id,
+       
+        );
+    
         navigate('/gallery');
       } else {
         setError(data.message || 'Invalid email or password');

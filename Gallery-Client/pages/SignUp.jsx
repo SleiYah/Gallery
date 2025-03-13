@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import '../styles/signup.css'; // You'll need to create this CSS file
+import '../styles/signup.css'; 
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +10,6 @@ const SignUp = () => {
     confirmPassword: ''
   });
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
   const handleChange = (e) => {
@@ -36,11 +35,10 @@ const SignUp = () => {
     }
     
     setError('');
-    setLoading(true);
     
     try {
       // Replace with your actual API endpoint
-      const response = await axios.post('http://localhost:80/projects/apis/v1/register', {
+      const response = await axios.post('http://localhost:80/projects/Gallery/gallery-server/register', {
         email: formData.email,
         password: formData.password
       });
@@ -60,9 +58,7 @@ const SignUp = () => {
       } else {
         setError('Request error. Please try again.');
       }
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
 
   return (
@@ -125,14 +121,12 @@ const SignUp = () => {
             <button 
               type="submit" 
               className="signup-button"
-              disabled={loading}
             >
-              {loading ? 'Creating your gallery...' : 'Sign Up'}
-            </button>
+Sign Up            </button>
             
-         {/*    <div className="login-prompt">
+            <div className="login-prompt">
               Already have a gallery? <Link to="/login" className="login-link">Log in</Link>
-            </div> */}
+            </div>
           </form>
         )}
       </div>
