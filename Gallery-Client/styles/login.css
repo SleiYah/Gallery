@@ -1,0 +1,131 @@
+/* login.css - Simple & Cozy theme */
+:root {
+    --color-primary: #7d5a5a;
+    --color-text: #3d3131;
+    --color-text-light: #6e5c5c;
+    --color-bg: #f9f4f1;
+    --color-card: #ffffff;
+    --color-accent: #d9bfb7;
+    --font-main: 'Segoe UI', 'Helvetica Neue', sans-serif;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .login-container {
+    min-height: 100vh;
+    background-color: var(--color-bg);
+    font-family: var(--font-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+  
+  .login-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    background-color: var(--color-card);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  }
+  
+  .login-header {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .login-header h1 {
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  
+  .login-header p {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .form-group label {
+    font-size: 0.9rem;
+    color: var(--color-text);
+    font-weight: 500;
+  }
+  
+  .form-group input {
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+  }
+  
+  .form-group input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+  
+  .login-button {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 0.5rem;
+  }
+  
+  .login-button:hover {
+    background-color: #6a4a4a;
+  }
+  
+  .login-button:disabled {
+    background-color: #b8a7a7;
+    cursor: not-allowed;
+  }
+  
+  .signup-prompt {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+  }
+  
+  .signup-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .signup-link:hover {
+    text-decoration: underline;
+  }
+  
+  .error-message {
+    background-color: #fbf2f2;
+    color: #a15252;
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }

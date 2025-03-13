@@ -1,20 +1,22 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import SignUp from "../pages/SignUp"
+import Login from "../pages/Login"
+
 import './App.css'
 
 function App() {
 
   return (
-    <>
+  
       <BrowserRouter>
-        <Navigation />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/add-photo" element={<AddPhoto />} />
+          {/* <Route path="/gallery" element={<Gallery />} /> */}
+          {/* <Route path="/add-photo" element={<AddPhoto />} /> */}
         </Routes>
       </BrowserRouter>
-    </>
+    
   )
 }
 
