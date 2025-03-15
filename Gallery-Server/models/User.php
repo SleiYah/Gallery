@@ -7,7 +7,7 @@ class User extends UserSkeleton{
     public static function save(){
         global $conn;
 
-        $query = $conn->prepare("INSERT INTO Users (email, password) VALUES (?,?)");
+        $query = $conn->prepare("INSERT INTO users (email, password) VALUES (?,?)");
         $query->bind_param("ss", self::$email, self::$password);
         $query->execute();
 
@@ -17,7 +17,7 @@ class User extends UserSkeleton{
     public static function read(){
         global $conn;
         
-        $query = $conn->prepare("SELECT * FROM Users where email = ?");
+        $query = $conn->prepare("SELECT * FROM users where email = ?");
         $query->bind_param("s", self::$email);
         $query->execute();
         $response = $query->get_result();
