@@ -2,7 +2,7 @@
 
 require_once(__DIR__ . "/../connection/connection.php");
 
-$query = "CREATE TABLE `photos` (
+$query = "CREATE TABLE `Photos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
