@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, Navigate} from 'react-router-dom';
 import SignUp from "../pages/SignUp"
 import Login from "../pages/Login"
 import AddPhoto from "../pages/AddPhoto"
@@ -14,6 +14,7 @@ function App() {
   
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Navigate to="/login"/>}/>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/gallery" element={<Gallery />} />
