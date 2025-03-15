@@ -89,6 +89,27 @@ class PhotoController{
             "photos" => $photos
         ]);
     }
+    static function getPhoto() {
+        global $data;
+        
+        $user_id = $data['user_id'] ?? '';
+        $photo_id = $data['photo_id'] ?? '';
+
+        
+        if(!$user_id && !$photo_id) {
+            echo json_encode(["status" => "error", "message" => "User ID and photo ID are required"]);
+            return;
+        }
+        
+        Photo::setIds($user_id,$photo_id);
+        
+        $photo = Photo::readById();
+        
+        echo json_encode([
+            "status" => "success",
+            "photo" => $photo
+        ]);
+    }
     static function deletePhoto() {
         global $data;
         
@@ -138,12 +159,19 @@ class PhotoController{
             return;
         }
         
-        if(!$title || !$base64Image) {
-            echo json_encode(["status" => "error", "message" => "Title and image are required"]);
+        if(!$title || !$tag || !$description) {
+            echo json_encode(["status" => "error", "message" => "All Fields are required"]);
             return;
         }
         
-        if(preg_match('/^data:image\/(\w+);base64,/', $base64Image, $matches)) {
+        Photo::setIds($user_id, $photo_id);
+        $oldImagePath = Photo::getPhotoPath();
+        
+        $newImageProvided = false;
+        $imageUrl = null;
+        
+        if ($base64Image && preg_match('/^data:image\/(\w+);base64,/', $base64Image, $matches)) {
+            $newImageProvided = true;
             $imageType = $matches[1];
             
             $base64Image = preg_replace('/^data:image\/\w+;base64,/', '', $base64Image);
@@ -161,42 +189,44 @@ class PhotoController{
                 mkdir($uploadDir, 0755, true);
             }
             
-            Photo::setIds($user_id, $photo_id);
-            $oldImagePath = Photo::getPhotoPath();
-            
             $filename = uniqid() . '.' . $imageType;
             $filePath = $uploadDir . $filename;
             
-            if(file_put_contents($filePath, $imageData)) {
-                $imageUrl = 'images/' . $filename;
-                
-                Photo::update($user_id, $photo_id, $title, $tag, $description, $imageUrl);
-                
-                if(Photo::updatePhoto()) {
-                    if($oldImagePath) {
-                        $oldFilePath = __DIR__ . '/../../' . $oldImagePath;
-                        if(file_exists($oldFilePath)) {
-                            @unlink($oldFilePath);
-                        }
-                    }
-                    
-                    echo json_encode([
-                        "status" => "success",
-                        "message" => "Photo updated successfully",
-                        "photo" => [
-                            "url" => $imageUrl,
-                            "title" => $title
-                        ]
-                    ]);
-                } else {
-                    @unlink($filePath);
-                    echo json_encode(["status" => "error", "message" => "Failed to update photo information"]);
-                }
-            } else {
+            if(!file_put_contents($filePath, $imageData)) {
                 echo json_encode(["status" => "error", "message" => "Failed to save image to server"]);
+                return;
             }
+            
+            $imageUrl = 'images/' . $filename;
+        }
+        
+        if (!$newImageProvided) {
+            $imageUrl = $oldImagePath;
+        }
+        
+        Photo::update($user_id, $photo_id, $title, $tag, $description, $imageUrl);
+        
+        if(Photo::updatePhoto()) {
+            if($newImageProvided && $oldImagePath) {
+                $oldFilePath = __DIR__ . '/../../' . $oldImagePath;
+                if(file_exists($oldFilePath)) {
+                    @unlink($oldFilePath);
+                }
+            }
+            
+            echo json_encode([
+                "status" => "success",
+                "message" => "Photo updated successfully",
+                "photo" => [
+                    "url" => $imageUrl,
+                    "title" => $title
+                ]
+            ]);
         } else {
-            echo json_encode(["status" => "error", "message" => "Invalid image format"]);
+            if($newImageProvided) {
+                @unlink($filePath);
+            }
+            echo json_encode(["status" => "error", "message" => "Failed to update photo information"]);
         }
     }
 }

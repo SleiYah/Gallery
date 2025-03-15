@@ -12,6 +12,12 @@
 
 body{
   background-color:  #f9f4f1;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-bg);
+    font-family: var(--font-main);
+    color: var(--color-text);
+  
 }
 
 #root {

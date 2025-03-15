@@ -1,13 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import '../styles/photo.css';
+import React from "react";
+import { API_BASE_URL } from "../src/config";
+
+import { Link } from "react-router-dom";
+import "../styles/photo.css";
 
 const Photo = ({ photo, onDelete }) => {
   const { id, title, tag, description, image } = photo;
-  
-  // Format image URL
-  const imageUrl = `http://localhost:80/projects/Gallery/gallery-server/${image}`;
-  
+
+  const imageUrl = `${API_BASE_URL}/${image}`;
+
   return (
     <div className="photo-card">
       <div className="photo-image">
@@ -15,21 +16,23 @@ const Photo = ({ photo, onDelete }) => {
       </div>
       <div className="photo-info">
         <h3 className="photo-title">{title}</h3>
-        
+
         {tag && <span className="photo-tag">{tag}</span>}
-        
+
         {description && (
           <p className="photo-description">
-            {description.length > 100 
-              ? `${description.substring(0, 100)}...` 
+            {description.length > 100
+              ? `${description.substring(0, 100)}...`
               : description}
           </p>
         )}
-        
+
         <div className="photo-actions">
-          <Link to={`/edit-photo/${id}`} className="edit-btn">Edit</Link>
-          <button 
-            onClick={() => onDelete(photo)} 
+          <Link to={`/edit-photo/${id}`} className="edit-btn">
+            Edit
+          </Link>
+          <button
+            onClick={() => onDelete(photo)}
             className="delete-btn"
             aria-label={`Delete ${title}`}
           >

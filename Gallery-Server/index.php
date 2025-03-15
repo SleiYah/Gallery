@@ -21,6 +21,7 @@ $apis = [
     '/register'    => ['controller' => 'UserController', 'method' => 'register'],
     '/addPhoto'    => ['controller' => 'PhotoController', 'method' => 'addPhoto'],
     '/getPhotos'    => ['controller' => 'PhotoController', 'method' => 'getPhotos'],
+    '/getPhoto'    => ['controller' => 'PhotoController', 'method' => 'getPhoto'],
     '/deletePhoto'    => ['controller' => 'PhotoController', 'method' => 'deletePhoto'],
     '/updatePhoto'    => ['controller' => 'PhotoController', 'method' => 'updatePhoto']
 

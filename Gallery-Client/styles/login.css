@@ -1,11 +1,6 @@
-/* login.css - Simple & Cozy theme */
 
   
-  body {
-    margin: 0;
-    padding: 0;
-  }
-  
+ 
   .login-container {
     background-color: var(--color-bg);
     font-family: var(--font-main);

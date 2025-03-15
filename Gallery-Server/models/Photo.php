@@ -34,6 +34,16 @@ class Photo extends PhotoSkeleton{
         
         return $photos;
     }
+    public static function readById() {
+        global $conn;
+        
+        $query = $conn->prepare("SELECT * FROM photos WHERE user_id = ? and id = ?");
+        $query->bind_param("ii", self::$user_id , self::$id);
+        $query->execute();
+        $result = $query->get_result();
+        $photo = $result->fetch_assoc();
+        return $photo;
+    }
     public static function delete() {
         global $conn;
         

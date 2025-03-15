@@ -4,8 +4,8 @@ include_once("../models/User.php");
 include_once("../apis/v1/PhotoController.php");
 include_once(__DIR__ . "/../connection/connection.php");
 
- //User::create("sleiyah02@gmail.com", hash('sha256', "CaptainSlash"));
- //User::save();
+ User::create("sleiyah02@gmail.com", hash('sha256', "CaptainSlash"));
+ User::save();
 
  $userEmail = "sleiyah02@gmail.com";
  User::readEmail($userEmail);

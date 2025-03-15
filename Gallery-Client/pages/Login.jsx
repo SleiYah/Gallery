@@ -1,61 +1,61 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import '../styles/login.css';
+import React, { useState } from "react";
+import { API_BASE_URL } from "../src/config";
+
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import "../styles/login.css";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
-  const [error, setError] = useState('');
-  
+  const [error, setError] = useState("");
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevData => ({
-      ...prevData,
-      [name]: value
+    setFormData((formData) => ({
+      ...formData,
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!formData.email || !formData.password) {
-      setError('Please fill in all fields');
+      setError("Please fill in all fields");
       return;
     }
-    
-    setError('');
-    
+
+    setError("");
+
     try {
-      const response = await axios.post('http://localhost:80/projects/Gallery/gallery-server/login', {
+      const response = await axios.post(`${API_BASE_URL}/login`, {
         email: formData.email,
-        password: formData.password
+        password: formData.password,
       });
-      
+
       const data = response.data;
-      
-      if (data.status === 'success') {
-        localStorage.setItem('user_id', data.data.id,
-       
-        );
-    
-        navigate('/gallery');
+
+      if (data.status === "success") {
+        localStorage.setItem("user_id", data.data.id);
+
+        navigate("/gallery");
       } else {
-        setError(data.message || 'Invalid email or password');
+        setError(data.message || "Invalid email or password");
       }
     } catch (err) {
       if (err.response) {
         setError(err.response.data.message || `Error: ${err.response.status}`);
       } else if (err.request) {
-        setError('No response from server. Please try again.');
+        setError("No response from server. Please try again.");
       } else {
-        setError('Request error. Please try again.');
+        setError("Request error. Please try again.");
       }
-    } 
+    }
   };
 
   return (
@@ -65,10 +65,10 @@ const Login = () => {
           <h1>Welcome Back</h1>
           <p>Log in to your cozy photo space</p>
         </div>
-        
+
         <form onSubmit={handleSubmit} className="login-form">
           {error && <div className="error-message">{error}</div>}
-          
+
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -81,7 +81,7 @@ const Login = () => {
               required
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
@@ -94,15 +94,16 @@ const Login = () => {
               required
             />
           </div>
-          
-          <button 
-            type="submit" 
-            className="login-button"
-          >
-  Login          </button>
-          
+
+          <button type="submit" className="login-button">
+            Login{" "}
+          </button>
+
           <div className="signup-prompt">
-            Don't have an account yet? <Link to="/signup" className="signup-link">Sign up</Link>
+            Don't have an account yet?{" "}
+            <Link to="/signup" className="signup-link">
+              Sign up
+            </Link>
           </div>
         </form>
       </div>
