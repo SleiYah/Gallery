@@ -1,6 +1,6 @@
 <?php
 
-require(__DIR__ . "../connection/connection.php");
+require_once(__DIR__ . "/../connection/connection.php");
 
 $query = ("CREATE TABLE `photos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
