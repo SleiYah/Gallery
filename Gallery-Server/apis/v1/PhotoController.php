@@ -46,7 +46,7 @@ class PhotoController{
             if(file_put_contents($filePath, $imageData)) {
                 $imageUrl = 'images/' . $filename;
                 
-                Photo::create($user_id, $title, $tag, $description, $imageUrl);
+                Photo::create($user_id, $title, ucfirst(strtolower($tag)), $description, $imageUrl);
                 $result = Photo::save();
                 
                 if($result) {
@@ -204,7 +204,7 @@ class PhotoController{
             $imageUrl = $oldImagePath;
         }
         
-        Photo::update($user_id, $photo_id, $title, $tag, $description, $imageUrl);
+        Photo::update($user_id, $photo_id, $title, ucfirst(strtolower($tag)), $description, $imageUrl);
         
         if(Photo::updatePhoto()) {
             if($newImageProvided && $oldImagePath) {
