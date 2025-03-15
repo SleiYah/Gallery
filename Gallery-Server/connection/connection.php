@@ -7,7 +7,7 @@ header('Content-Type: application/json');
 
 $host = "localhost";
 $user = "root";
-$password = "";
+$password = "S13iy@h02";
 $db_name = "gallery";
 
 $conn = new mysqli($host, $user, $password, $db_name);
