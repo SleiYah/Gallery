@@ -35,7 +35,6 @@ const Gallery = () => {
       const response = await axios.post(`${API_BASE_URL}/getPhotos`, {
         user_id: user,
       });
-      console.log("response", response);
 
       if (response.data.status === "success") {
         setPhotos(response.data.photos);

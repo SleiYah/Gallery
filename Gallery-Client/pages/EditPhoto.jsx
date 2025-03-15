@@ -33,7 +33,6 @@ const EditPhoto = () => {
           photo_id: id,
         });
         if (response.data.status === "success") {
-          console.log("photoresponse", response);
 
           const photo = response.data.photo;
 
