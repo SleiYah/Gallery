@@ -10,7 +10,7 @@ $query = ("CREATE TABLE `photos` (
   `description` text DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY  `user_id` REFERENCES users(`id`),");
+  FOREIGN KEY  `user_id` REFERENCES users('id'),");
 
 $start = $conn->prepare($query);
 $start->execute();
