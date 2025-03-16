@@ -46,7 +46,7 @@ const Login = () => {
       } else {
         console.log("response",response)
 
-        setError(data.message || "Invalid email or password");
+        setError(data.message || response);
       }
     } catch (err) {
       if (err.response) {
