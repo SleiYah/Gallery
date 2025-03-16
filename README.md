@@ -1,4 +1,5 @@
-Hosted at url: http://51.44.8.213/
+Hosted at url: http://51.44.8.213/ <br>
+
 ***API Endpoints***
 The application provides the following API endpoints:
 ***User Management***
