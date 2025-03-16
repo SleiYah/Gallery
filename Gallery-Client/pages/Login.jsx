@@ -39,7 +39,7 @@ const Login = () => {
       });
       
       const data = response.data;
-
+console.log("response",response)
       if (data.status === "success") {
         localStorage.setItem("user_id", data.data.id);
 
