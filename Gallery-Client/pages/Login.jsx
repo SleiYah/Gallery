@@ -37,7 +37,7 @@ const Login = () => {
         email: formData.email,
         password: formData.password,
       });
-      
+      console.log(`${API_BASE_URL}/login`)
       const data = response.data;
       if (data.status === "success") {
         localStorage.setItem("user_id", data.data.id);
